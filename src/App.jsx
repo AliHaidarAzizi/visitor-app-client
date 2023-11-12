@@ -1,14 +1,11 @@
 
-import './App.css'
+import Header from './components/header'
+import AppRoutes from './routes'
 
 function App() {
 
   return (
-    <>
-          <h1 className="text-3xl font-bold underline text-blue-400">
-      Hello world!
-    </h1>
-    </>
+     <AppRoutes />
   )
 }
 
