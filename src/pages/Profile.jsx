@@ -1,8 +1,14 @@
 import React from 'react'
+import SidebarComponent from '../components/Sidebar'
 
-const Profile = () => {
+const Profile = ({userId}) => {
   return (
-    <div>Profile</div>
+    <div className='flex'>
+      <SidebarComponent />
+      <div>
+        profile {userId}
+      </div>
+    </div>
   )
 }
 

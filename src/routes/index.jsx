@@ -65,7 +65,7 @@ import Profile from "../pages/Profile";
     return (
       <Routes>
             <Route path="/" element={<Dashboard userId={userId} />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile userId={userId}/>} />
             
 
       </Routes>

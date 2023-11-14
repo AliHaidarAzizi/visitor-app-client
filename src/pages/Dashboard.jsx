@@ -1,13 +1,21 @@
 import React from 'react'
+import SidebarComponent from '../components/Sidebar'
+
+
 
 const Dashboard = ({userId}) => {
   return (
-    <div>
-        <h2>
-        Dashboard
-        </h2>
+    <>
+    <div className='flex'>
+      <SidebarComponent />
+      <main>
+
+      <h2>
+        Dashboard</h2>
         <h4>user Id: {userId}</h4>
-        </div>
+      </main>
+    </div>
+    </>
   )
 }
 
