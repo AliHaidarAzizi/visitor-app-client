@@ -1,17 +1,34 @@
 import { ChevronFirst, LogOut, LifeBuoy, Receipt, Boxes, Package, LayoutDashboard, ChevronLast, UserSquareIcon, } from 'lucide-react'
 import { createContext, useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Cookies from "universal-cookie";
+import { toast } from 'react-toastify'
 
 const SidebarContext = createContext()
 const Sidebar = ({children}) => {
     const localStore = localStorage.getItem("sidebarExpanded") == "true"
     const [expanded, setExpended] = useState(localStore)
+    const navigate = useNavigate()
 
     const handleClick = () => {
       setExpended(current => {
           localStorage.setItem("sidebarExpanded", !current)
         return !current
       })
+    }
+
+    const handleLogOut = () => {
+      const  cookies = new Cookies(null,{ path: "/"}) 
+        cookies.remove('token')
+        toast.warning("Log out successful", {
+          icon: "🔓",
+          autoClose: 3000
+        })
+        setTimeout(() => {
+          navigate("/login");
+        }, 1500)
+        
+    
     }
 
   return (
@@ -39,7 +56,7 @@ const Sidebar = ({children}) => {
                         <h4 className=' font-semibold'> John Doe </h4>
                         <span className=' text-xs text-grey-600'>example@mail.com</span>
                     </div>
-                    <LogOut size={20}/>
+                    <LogOut className=' cursor-pointer' size={20} onClick={handleLogOut}/>
                 </div>
 
             </div>

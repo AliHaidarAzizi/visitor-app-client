@@ -16,7 +16,7 @@ export const Login = () => {
     const reqBody = {email, password}
 
     try {
-      const res = await axios.post("http://localhost:3000/auth/login", reqBody)
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, reqBody)
       console.log(res)
        toast.success(res.data.message, {
         icon: "🔓",

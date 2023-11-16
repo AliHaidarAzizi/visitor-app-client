@@ -19,7 +19,7 @@ export const Register = () => {
     const reqBody = {email, username, password}
 
     try {
-      const res = await axios.post("http://localhost:3000/auth/register", reqBody)
+      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, reqBody)
       console.log(res)
        toast.success(res.data.message, {
         icon: "🚀",
