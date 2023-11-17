@@ -3,27 +3,32 @@ import Header from '../components/header'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 import { toast } from 'react-toastify'
-import axios from 'axios'
+import { apiLogin } from '../../utils/api'
 export const Login = () => {
   const navigate = useNavigate()
-  const cookies = new Cookies(null, {path : "/"})
+  // const cookies = new Cookies(null, {path : "/"})
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     // console.dir(e.target[2].value)
+
+
     const email = e.target[0].value
     const password = e.target[1].value
-    const reqBody = {email, password}
+    const data = {email, password}
+
+    // Method 2
+    
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, reqBody)
+      const res = await apiLogin(data)
       console.log(res)
        toast.success(res.data.message, {
         icon: "🔓",
         autoClose: 3000
       })
 
-      cookies.set("token", res.data.token)
+      // cookies.set("token", res.data.token)
 
       setTimeout(() => {
         navigate("/secured");
@@ -32,7 +37,7 @@ export const Login = () => {
 
     } catch (error) {
       console.error(error);
-      toast.error("Unauthorised")
+      toast.error(error.response.data.message)
       
       // alert(error.response.data.message);
     }

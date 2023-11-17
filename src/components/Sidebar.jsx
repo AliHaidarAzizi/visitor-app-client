@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Cookies from "universal-cookie";
 import { toast } from 'react-toastify'
 
+
 const SidebarContext = createContext()
 const Sidebar = ({children}) => {
     const localStore = localStorage.getItem("sidebarExpanded") == "true"
@@ -15,6 +16,9 @@ const Sidebar = ({children}) => {
           localStorage.setItem("sidebarExpanded", !current)
         return !current
       })
+    }
+    const handleLogoButton = () => {
+      navigate("/secured")
     }
 
     const handleLogOut = () => {
@@ -35,7 +39,7 @@ const Sidebar = ({children}) => {
     <aside className='h-screen'>
         <nav className=' h-full flex flex-col bg-white border-r shadow-sm'>
            <div className=' p-4 pb-2 flex justify-between items-center'>
-            <img src="https://img.logoipsum.com/243.svg" alt="" className={` overflow-hidden transition-all ${expanded ? "w-32": "w-0"}  `}/>
+            <img src="https://img.logoipsum.com/243.svg" alt="" className={` overflow-hidden cursor-pointer transition-all ${expanded ? "w-32": "w-0"}  `} onClick={handleLogoButton}/>
             <button 
                 onClick={handleClick}
                 className=' p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100'>
@@ -56,7 +60,9 @@ const Sidebar = ({children}) => {
                         <h4 className=' font-semibold'> John Doe </h4>
                         <span className=' text-xs text-grey-600'>example@mail.com</span>
                     </div>
-                    <LogOut className=' cursor-pointer' size={20} onClick={handleLogOut}/>
+                    
+                      <LogOut className=' hover:text-red-600 hover:scale-110 cursor-pointer' size={20} title='Log Out' onClick={handleLogOut} />
+                    
                 </div>
 
             </div>
@@ -105,7 +111,7 @@ const SidebarComponent = () => {
 
   return (
     <Sidebar>
-        <SidebarItem icon={<LayoutDashboard size={20} />} to="/secured"  text="Dashboard" alert/>
+        <SidebarItem icon={<LayoutDashboard size={20} />} to="/secured"  text="Dashboard"/>
         <SidebarItem icon={<UserSquareIcon size={20} />} to="/secured/profile" text="User" />
 
 

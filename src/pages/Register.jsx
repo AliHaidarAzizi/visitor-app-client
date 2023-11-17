@@ -1,8 +1,8 @@
 import React from 'react'
 import Header from '../components/header'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { toast } from 'react-toastify'
+import { apiRegister } from '../../utils/api'
 
 export const Register = () => {
 
@@ -13,13 +13,22 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     // console.dir(e.target[2].value)
+
+    // Method 1
     const email = e.target[0].value
     const username = e.target[1].value
     const password = e.target[2].value
-    const reqBody = {email, username, password}
+    const data = {email, username, password}
+
+    // Method 2
+    // const form = e.target;
+    // console.log(form)
+    // const formData = new FormData(form);
+    // const data = Object.fromEntries(formData);
+    
 
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, reqBody)
+      const res = await apiRegister(data)
       console.log(res)
        toast.success(res.data.message, {
         icon: "🚀",
