@@ -1,15 +1,27 @@
 import { ChevronFirst, LogOut, LifeBuoy, Receipt, Boxes, Package, LayoutDashboard, ChevronLast, UserSquareIcon, } from 'lucide-react'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Cookies from "universal-cookie";
 import { toast } from 'react-toastify'
+import { viewUser } from '../../utils/api/user';
 
 
 const SidebarContext = createContext()
 const Sidebar = ({children}) => {
     const localStore = localStorage.getItem("sidebarExpanded") == "true"
     const [expanded, setExpended] = useState(localStore)
+    const [user, setUser] = useState([])
+    const [email, setEmail] = useState([])
     const navigate = useNavigate()
+
+    const fetchUser = async () => {
+      const userData = await viewUser()
+      setUser(userData.data.data.username)
+      setEmail(userData.data.data.email)
+    }
+    useEffect(()=> {
+      fetchUser()
+    },[])
 
     const handleClick = () => {
       setExpended(current => {
@@ -57,8 +69,8 @@ const Sidebar = ({children}) => {
                     className={`flex justify-between items-center overflow-hidden transition-all ${expanded ? "w-52 ml-3": "w-0"}`}   
                 >
                     <div className='leading-4'>
-                        <h4 className=' font-semibold'> John Doe </h4>
-                        <span className=' text-xs text-grey-600'>example@mail.com</span>
+                        <h4 className=' font-semibold capitalize'>{user}</h4>
+                        <span className=' text-xs text-grey-600'>{email}</span>
                     </div>
                     
                       <LogOut className=' hover:text-red-600 hover:scale-110 cursor-pointer' size={20} title='Log Out' onClick={handleLogOut} />

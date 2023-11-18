@@ -14,6 +14,7 @@ import Dashboard from "../pages/Dashboard";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Profile from "../pages/Profile";
+import Venue from "../pages/Venue";
 
   
   
@@ -66,7 +67,7 @@ import Profile from "../pages/Profile";
       <Routes>
             <Route path="/" element={<Dashboard userId={userId} />} />
             <Route path="/profile" element={<Profile userId={userId}/>} />
-            
+            <Route path="/:venueId" element={<Venue />} />
 
       </Routes>
     )
