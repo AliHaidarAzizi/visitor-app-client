@@ -20,7 +20,9 @@ const Venue = () => {
   }, [venueId])
 
   return (
+    <>
     <div>Venue {venueId}</div>
+    </>
   )
 }
 

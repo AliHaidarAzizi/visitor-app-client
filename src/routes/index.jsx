@@ -15,6 +15,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Profile from "../pages/Profile";
 import Venue from "../pages/Venue";
+import VenueForm from "../pages/VenueForm";
 
   
   
@@ -68,6 +69,7 @@ import Venue from "../pages/Venue";
             <Route path="/" element={<Dashboard userId={userId} />} />
             <Route path="/profile" element={<Profile userId={userId}/>} />
             <Route path="/:venueId" element={<Venue />} />
+            <Route path="/add" element={<VenueForm />} />
 
       </Routes>
     )

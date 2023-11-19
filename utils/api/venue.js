@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from ".";
 import Cookies from "universal-cookie";
+import { data } from "autoprefixer";
 
 const cookies = new Cookies(null, { path: "/" });
 
@@ -38,3 +39,7 @@ apiVenue.interceptors.response.use(
 export const listAllVenue = async () => {
   return await apiVenue.get("/");
 };
+
+export const apiAddVenue = async (data) => {
+  return await apiVenue.post("/add", data)
+}

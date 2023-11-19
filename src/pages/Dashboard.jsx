@@ -55,7 +55,7 @@ const Dashboard = () => {
           
           <h2 className=' capitalize text-2xl font-bold '>{`Welcome ${user}!`}</h2>
           <div className='grid grid-cols-3 pb-3'>
-              <button className=' col-start-3 bg-indigo-300 hover:bg-indigo-500 rounded-md py-1 text-white'>Add New Venue</button>
+              <button className=' col-start-3 bg-indigo-300 hover:bg-indigo-500 rounded-md py-1 text-white' onClick={() => navigate("/secured/add")}>Add New Venue</button>
           </div>
           <div className='shadow-md rounded-lg hidden md:block'>
             <table className='w-full'>
