@@ -1,10 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import SidebarComponent from '../components/Sidebar'
-import { listAllVenue } from '../../utils/api/venue'
-import { toast } from 'react-toastify'
-import { viewUser } from '../../utils/api/user'
-import { viewVisitor } from '../../utils/api/visitor'
-import { useNavigate } from 'react-router-dom'
+
 
 
 
@@ -27,19 +21,15 @@ const Dashboard = () => {
       toast.error(error.response.data.message)
     }
   }
+
+  const humanisedDateTime = (dateTime) => {
+    // 1 step - convert string to dateTime data type
+    const newDateTime = DateTime.fromISO(dateTime)
+    // 2. - Format to the designated format
+    return newDateTime.toLocaleString()
+
+  }
   
-  // const fetchVisitors = async () => {
-  //   try {
-      
-  //     const venueData = data.map((venue) => {
-  //       return venue.id
-  //     });
-  //     console.log(venueData)
-  //     await viewVisitor(venueData)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
 
   useEffect(()=> {
     fetchVenues()
@@ -63,6 +53,7 @@ const Dashboard = () => {
                 <tr >
                   <th className=' p-5 text-sm  font-semibold tracking-wide text-left'>Venue/Event Name</th>
                   <th className=' w-48 p-5 text-sm font-semibold  tracking-wide text-left '>Capacity</th>
+                  <th className=' w-32 p-5 text-sm font-semibold tracking-wide text-left '>Visit Count</th>
                   <th className=' w-32 p-5 text-sm font-semibold tracking-wide text-left '>Created At</th>
                   <th className=' w-32 p-5 text-sm font-semibold tracking-wide text-left '>Action</th>
                 </tr>
@@ -72,8 +63,8 @@ const Dashboard = () => {
 
                   <tr key={index} className='bg-indigo-50'>
                   <td className=' p-5 text-sm text-gray-800 '>{venue.venueName}</td>
-                  <td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.venueCapacity}</span></td>
-                  <td className=' p-5 text-sm text-gray-800 '>{venue.createdAt}</td>
+                  <td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.venueCapacity}</span></td><td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.visitLogsCount}</span></td>
+                  <td className=' p-5 text-sm text-gray-800 '>{humanisedDateTime(venue.createdAt)}</td>
                   <td  className=' p-5 text-sm font-bold text-blue-800 hover:underline cursor-pointer' onClick={()=> navigate(`/secured/${venue.id}`)}
                   >View more</td>
 
@@ -88,7 +79,7 @@ const Dashboard = () => {
                 <div className='flex gap-2 justify-between space-x-4' >
                   <div>
                     <div className='flex items-center space-x-3 text-sm'>
-                      <div className='p-3 text-sm text-gray-800 '>{venue.createdAt}
+                      <div className='p-3 text-sm text-gray-800 '>{humanisedDateTime(venue.createdAt)}
                       </div>
                     </div>
                     <div className='p-3 text-lg capitalize font-semibold text-gray-800 '>{venue.venueName}
