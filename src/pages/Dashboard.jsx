@@ -1,3 +1,11 @@
+import { useNavigate } from "react-router-dom"
+import { apiDeleteVenue, listAllVenue } from "../../utils/api/venue"
+import { useEffect, useState } from "react"
+import { viewUser } from "../../utils/api/user"
+import { DateTime } from 'luxon'
+import { toast } from 'react-toastify'
+import SidebarComponent from "../components/Sidebar"
+
 
 
 
@@ -29,7 +37,19 @@ const Dashboard = () => {
     return newDateTime.toLocaleString()
 
   }
-  
+  const deleteVenue = async (venueId) => {
+    try {
+       const res = await apiDeleteVenue(venueId);
+      toast.error(res.data.message, {
+        position: toast.POSITION.TOP_CENTER,
+        icon: "📤",   
+        autoClose: 3000
+      })
+      await fetchVenues()
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(()=> {
     fetchVenues()
@@ -65,8 +85,10 @@ const Dashboard = () => {
                   <td className=' p-5 text-sm text-gray-800 '>{venue.venueName}</td>
                   <td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.venueCapacity}</span></td><td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.visitLogsCount}</span></td>
                   <td className=' p-5 text-sm text-gray-800 '>{humanisedDateTime(venue.createdAt)}</td>
-                  <td  className=' p-5 text-sm font-bold text-blue-800 hover:underline cursor-pointer' onClick={()=> navigate(`/secured/${venue.id}`)}
-                  >View more</td>
+                  <td  className=' p-5 text-sm font-bold text-blue-800' 
+                  >
+                    <p className="hover:underline cursor-pointer" onClick={()=> navigate(`/secured/${venue.id}`)}>View More</p>
+                   <p className="hover:underline cursor-pointer" onClick={() => deleteVenue(venue.id)}>Delete</p></td>
 
                 </tr>
                   ))}

@@ -43,3 +43,7 @@ export const listAllVenue = async () => {
 export const apiAddVenue = async (data) => {
   return await apiVenue.post("/add", data)
 }
+
+export const apiDeleteVenue = async (venueId) => {
+  return await apiVenue.delete(`/${venueId}`);
+}
