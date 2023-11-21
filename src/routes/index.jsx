@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import Profile from "../pages/Profile";
 import Venue from "../pages/Venue";
 import VenueForm from "../pages/VenueForm";
+import VisitorLogForm from "../components/VisitorLogForm";
 
   
   
@@ -26,6 +27,7 @@ import VenueForm from "../pages/VenueForm";
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/add/:venueId" element={<VisitorLogForm />} />
             <Route path="/secured/*" element={<ProtectedRoutes />} />
 
         </Routes>

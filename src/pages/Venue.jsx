@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { viewVisitor } from '../../utils/api/visitor'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import QRcodeGenerator from '../components/QRcodeGenerator'
 
 const Venue = () => {
   const {venueId} = useParams()
@@ -9,7 +10,7 @@ const Venue = () => {
   const fetchVisitors = async () => {
     try {
       const venueData = await viewVisitor(venueId)
-      return venueData
+      console.log(venueData)
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.message)
@@ -21,7 +22,12 @@ const Venue = () => {
 
   return (
     <>
-    <div>Venue {venueId}</div>
+    <div> 
+        <h1>
+        Venue {venueId}
+        </h1>
+        <QRcodeGenerator />
+    </div>
     </>
   )
 }

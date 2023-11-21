@@ -39,11 +39,14 @@ apiVenue.interceptors.response.use(
 export const listAllVenue = async () => {
   return await apiVenue.get("/");
 };
+export const apiViewVenue = async (venueId) => {
+  return await apiVenue.get(`/${venueId}`);
+};
 
 export const apiAddVenue = async (data) => {
-  return await apiVenue.post("/add", data)
-}
+  return await apiVenue.post("/add", data);
+};
 
 export const apiDeleteVenue = async (venueId) => {
   return await apiVenue.delete(`/${venueId}`);
-}
+};
