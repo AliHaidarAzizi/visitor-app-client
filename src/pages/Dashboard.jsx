@@ -111,7 +111,7 @@ const Dashboard = () => {
                       Visit Total Count: {venue.visitLogsCount}
                       </span>
                       <span className="text-sm font-light">
-                      Venue Remaining Capacity:  {venue.venueCapacity-venue.visitLogsCount}
+                      Remaining Capacity:  {venue.venueCapacity-venue.visitLogsCount}
                       </span>
                     </div>
                   </div>
