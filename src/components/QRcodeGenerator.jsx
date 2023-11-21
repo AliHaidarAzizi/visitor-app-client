@@ -8,6 +8,7 @@ import { toast } from "react-toastify"
 
 const QRcodeGenerator = () => {
     const [qrcode, setQrCode] = useState('')
+    const [venue, setVenue] = useState([])
     const siteURL = import.meta.env.VITE_UI_BASE_URL
    
     const {venueId} = useParams()
@@ -20,6 +21,7 @@ const QRcodeGenerator = () => {
     const confirmVenue = async () => {
             try {
               const venueData = await apiViewVenue(venueId)
+              setVenue(venueData.data.data.venueName)
               const dbVenueId = venueData.data.data.id
               console.log(dbVenueId)
               return dbVenueId == venueId
@@ -60,7 +62,7 @@ const QRcodeGenerator = () => {
 
     <div>
         <div className="flex flex-col justify-center items-center">
-            <h1 className=" text-xl font-semibold">Welcome!</h1>
+            <h1 className=" text-xl font-semibold">Welcome to {venue}!</h1>
             <h3 className=" text-sm font-normal">Please Scan QRcode below to check in!</h3>
         </div>
         {qrcode && <>

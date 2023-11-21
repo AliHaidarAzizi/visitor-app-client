@@ -72,7 +72,7 @@ const Dashboard = () => {
               <thead className='bg-indigo-100 border-b-2 border-indigo-300'>
                 <tr >
                   <th className=' p-5 text-sm  font-semibold tracking-wide text-left'>Venue/Event Name</th>
-                  <th className=' w-48 p-5 text-sm font-semibold  tracking-wide text-left '>Capacity</th>
+                  <th className=' w-48 p-5 text-sm font-semibold  tracking-wide text-left '>Current Capacity</th>
                   <th className=' w-32 p-5 text-sm font-semibold tracking-wide text-left '>Visit Count</th>
                   <th className=' w-32 p-5 text-sm font-semibold tracking-wide text-left '>Created At</th>
                   <th className=' w-32 p-5 text-sm font-semibold tracking-wide text-left '>Action</th>
@@ -83,7 +83,7 @@ const Dashboard = () => {
 
                   <tr key={index} className='bg-indigo-50'>
                   <td className=' p-5 text-sm text-gray-800 '>{venue.venueName}</td>
-                  <td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.venueCapacity}</span></td><td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.visitLogsCount}</span></td>
+                  <td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.venueCapacity-venue.visitLogsCount}</span></td><td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.visitLogsCount}</span></td>
                   <td className=' p-5 text-sm text-gray-800 '>{humanisedDateTime(venue.createdAt)}</td>
                   <td  className=' p-5 text-sm font-bold text-blue-800' 
                   >
@@ -97,20 +97,26 @@ const Dashboard = () => {
           </div>
           <div className='grid grid-cols-1 gap-4 md:hidden'>
             {data.map((venue, index) =>(
-              <div key={index} className='bg-indigo-50 p-2 space-y-1 rounded-lg shadow'>
+              <div key={index} className='bg-indigo-50 p-2 space-y-1 rounded-lg  shadow-md'>
                 <div className='flex gap-2 justify-between space-x-4' >
                   <div>
                     <div className='flex items-center space-x-3 text-sm'>
                       <div className='p-3 text-sm text-gray-800 '>{humanisedDateTime(venue.createdAt)}
                       </div>
                     </div>
-                    <div className='p-3 text-lg capitalize font-semibold text-gray-800 '>{venue.venueName}
+                    <div className='py-1 px-3 text-lg capitalize font-semibold text-gray-800 '>{venue.venueName}
                     </div>
-                    <div className='p-3 text-md font-medium tracking-wide text-purple-900'>{venue.venueCapacity}
+                    <div className=' flex flex-col px-3 text-md font-medium tracking-wide text-purple-900'>
+                      <span className="pr-4">
+                      Visit Total Count: {venue.visitLogsCount}
+                      </span>
+                      <span className="text-sm font-light">
+                      Venue Remaining Capacity:  {venue.venueCapacity-venue.visitLogsCount}
+                      </span>
                     </div>
                   </div>
                   <div className='flex justify-center items-center'>
-                      <button onClick={()=> navigate(`/secured/${venue.id}`)} className=' text-white bg-indigo-600 py-4 px-3 rounded-lg' >View More</button>
+                      <button onClick={()=> navigate(`/secured/${venue.id}`)} className=' text-white bg-indigo-600 py-4 px-3 rounded-lg hover:bg-indigo-800' >View More</button>
                   </div>
               </div> 
             </div>

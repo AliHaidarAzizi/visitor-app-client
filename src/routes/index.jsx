@@ -17,6 +17,7 @@ import Profile from "../pages/Profile";
 import Venue from "../pages/Venue";
 import VenueForm from "../pages/VenueForm";
 import VisitorLogForm from "../components/VisitorLogForm";
+import ThankYou from "../pages/ThankYou";
 
   
   
@@ -27,6 +28,7 @@ import VisitorLogForm from "../components/VisitorLogForm";
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/thankyou" element={<ThankYou />} />
             <Route path="/add/:venueId" element={<VisitorLogForm />} />
             <Route path="/secured/*" element={<ProtectedRoutes />} />
 

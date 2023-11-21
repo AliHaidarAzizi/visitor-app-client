@@ -30,7 +30,7 @@ const VisitorLogForm = () => {
       })
 
       setTimeout(() => {
-        navigate("/login");
+        navigate("/thankyou");
       }, 3000)
 
 
