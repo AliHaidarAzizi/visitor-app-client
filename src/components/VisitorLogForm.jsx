@@ -3,8 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Header from './header'
 import { addVisitor } from '../../utils/api/addVisitor'
 import { toast } from 'react-toastify'
+import { useEffect, useState } from 'react'
 
 const VisitorLogForm = () => {
+  const [name, setName] = useState() 
  let {venueId } = useParams()
  console.log(venueId)
   venueId = parseInt(venueId)
@@ -19,6 +21,7 @@ const VisitorLogForm = () => {
     const visitorReason = e.target[3].value
     
     const data = {visitorName, visitorEmail, visitorContactNo, visitorReason, venueId}
+    // important: use react library for form! react-hook-form
     
     try {
       console.log(data)
@@ -28,7 +31,8 @@ const VisitorLogForm = () => {
         icon: "🚀",
         autoClose: 3000
       })
-
+      
+      localStorage.setItem('VISITOR_DATA', JSON.stringify(data))
       setTimeout(() => {
         navigate("/thankyou");
       }, 3000)
@@ -46,13 +50,19 @@ const VisitorLogForm = () => {
 
 
  }
+
+ useEffect(()=>{
+const localVisitorData = JSON.parse(localStorage.getItem('VISITOR_DATA'))
+typeof localVisitorData?.visitorName === 'string'  && setName(localVisitorData?.visitorName)
+
+ },[])
   
   return (
     <>
     <Header />
     <div>
-    <main className='m-4 mr-8 w-full lg:w-2/3'>
-            <div className=' p-4 flex flex-col justify-center items-center gap-2'>
+    <main className='m-4 w-screen'>
+            <div className='py-4 pr-4 pl-0 flex flex-col justify-center items-center gap-1'>
                 <h4 className=' text-2xl font-bold'>Visitor Form</h4>
                 <p>Please fill in the form</p>
                 <form 
@@ -61,6 +71,8 @@ const VisitorLogForm = () => {
                     <div className="mb-6">
                         <label htmlFor="visitorName" className="block mb-2 text-md font-medium text-gray-900 ">Full Name</label>
                         <input type='text' id="visitorName" 
+                        value={name}
+                        onChange={(e)=>setName(e.target.value)}
                         className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="John Doe" required />
 
                     </div>

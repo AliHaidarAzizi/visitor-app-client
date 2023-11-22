@@ -83,7 +83,7 @@ const Dashboard = () => {
 
                   <tr key={index} className='bg-indigo-50'>
                   <td className=' p-5 text-sm text-gray-800 '>{venue.venueName}</td>
-                  <td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.venueCapacity-venue.visitLogsCount}</span></td><td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.visitLogsCount}</span></td>
+                  <td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.venueCapacity === null ? null : venue.venueCapacity - venue.visitLogsCount}</span></td><td className=' p-5 text-sm text-gray-800 '><span className='p-1.5 text-md font-bold tracking-wide text-purple-900  '>{venue.visitLogsCount}</span></td>
                   <td className=' p-5 text-sm text-gray-800 '>{humanisedDateTime(venue.createdAt)}</td>
                   <td  className=' p-5 text-sm font-bold text-blue-800' 
                   >
@@ -111,7 +111,7 @@ const Dashboard = () => {
                       Visit Total Count: {venue.visitLogsCount}
                       </span>
                       <span className="text-sm font-light">
-                      Remaining Capacity:  {venue.venueCapacity-venue.visitLogsCount}
+                      Remaining Capacity:  {venue.venueCapacity === null ? null : venue.venueCapacity - venue.visitLogsCount}
                       </span>
                     </div>
                   </div>

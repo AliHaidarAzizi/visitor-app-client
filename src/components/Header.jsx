@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 const Header = () => {
     const navigate = useNavigate()
 
+   
+
   return (
     <header className=' h-16 w-screen flex justify-between justify-items-center p-4 shadow-md'>
       <img src="https://img.logoipsum.com/243.svg" alt="" onClick={() => navigate("/")} className=' cursor-pointer' />
