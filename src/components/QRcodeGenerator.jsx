@@ -1,7 +1,7 @@
 import {  useParams } from "react-router-dom"
 import  QRCode  from "qrcode"
 import { useEffect, useState } from "react"
-import { apiViewVenue } from "../../utils/api/venue"
+import { apiViewVenue } from "../utils/api/venue"
 import { toast } from "react-toastify"
 
 

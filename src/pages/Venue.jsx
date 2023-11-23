@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { viewVisitor } from '../../utils/api/visitor'
+import { viewVisitor } from '../utils/api/visitor'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import QRcodeGenerator from '../components/QRcodeGenerator'
 import { useState } from 'react'
 import { DateTime } from 'luxon'
-import { apiViewVenue } from '../../utils/api/venue'
+import { apiViewVenue } from '../utils/api/venue'
 
 
 const Venue = () => {

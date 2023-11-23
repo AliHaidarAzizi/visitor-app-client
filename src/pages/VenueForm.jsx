@@ -1,5 +1,5 @@
 import React from 'react'
-import { apiAddVenue } from '../../utils/api/venue'
+import { apiAddVenue } from '../utils/api/venue'
 import { toast } from 'react-toastify'
 import SidebarComponent from '../components/Sidebar'
 import { useNavigate } from 'react-router-dom'

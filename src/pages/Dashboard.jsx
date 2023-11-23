@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
-import { apiDeleteVenue, listAllVenue } from "../../utils/api/venue"
+import { apiDeleteVenue, listAllVenue } from "../utils/api/venue"
 import { useEffect, useState } from "react"
-import { viewUser } from "../../utils/api/user"
+import { viewUser } from "../utils/api/user"
 import { DateTime } from 'luxon'
 import { toast } from 'react-toastify'
 import SidebarComponent from "../components/Sidebar"

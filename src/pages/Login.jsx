@@ -3,7 +3,7 @@ import Header from "../components/header";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { toast } from "react-toastify";
-import { apiLogin } from "../../utils/api";
+import { apiLogin } from "../utils/api";
 export const Login = () => {
   const navigate = useNavigate();
   // const cookies = new Cookies(null, {path : "/"})

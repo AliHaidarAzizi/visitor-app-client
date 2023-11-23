@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../components/header'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { apiRegister } from '../../utils/api'
+import { apiRegister } from '../utils/api'
 
 export const Register = () => {
 

@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Cookies from "universal-cookie";
 import { toast } from 'react-toastify'
-import { viewUser } from '../../utils/api/user';
+import { viewUser } from '../utils/api/user';
 
 
 const SidebarContext = createContext()
