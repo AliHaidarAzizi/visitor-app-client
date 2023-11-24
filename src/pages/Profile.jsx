@@ -1,15 +1,13 @@
-import React from 'react'
-import SidebarComponent from '../components/Sidebar'
+import React from "react";
+import SidebarComponent from "../components/Sidebar.jsx";
 
-const Profile = ({userId}) => {
+const Profile = ({ userId }) => {
   return (
-    <div className='flex'>
+    <div className="flex">
       <SidebarComponent />
-      <div>
-        profile {userId}
-      </div>
+      <div>profile {userId}</div>
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../components/header";
+import Header from "../components/Header.jsx";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import { toast } from "react-toastify";
