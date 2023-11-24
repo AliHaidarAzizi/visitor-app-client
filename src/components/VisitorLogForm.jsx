@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Header from "./header";
+import Header from "./Header.jsx";
 import { addVisitor } from "../utils/api/addVisitor";
 import { toast } from "react-toastify";
 import useLocalStorage from "../hooks/useLocalStorage";
