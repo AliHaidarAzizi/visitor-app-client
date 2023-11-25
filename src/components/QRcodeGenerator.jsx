@@ -66,8 +66,10 @@ const QRcodeGenerator = () => {
             <h3 className=" text-sm font-normal">Please Scan QRcode below to check in!</h3>
         </div>
         {qrcode && <>
-            <div className="flex justify-center items-center p-4">
-                <img src={qrcode}  alt="QR Code" className="w-full h-auto max-w-xs object-cover rounded-lg shadow-md" />
+            <div className="flex flex-col gap-2 justify-center items-center p-4">
+                <img src={qrcode} alt="QR Code" className="w-full h-auto max-w-xs object-cover rounded-lg shadow-md" />
+
+                
             </div>
         </>}
     </div>
