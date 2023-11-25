@@ -4,13 +4,15 @@ import tickAnimation from "../lottie/tickAnimation.json";
 import { useNavigate } from "react-router-dom";
 import { viewUser } from "../utils/api/user";
 import { useEffect } from "react";
+import Cookies from "universal-cookie";
 
 const ThankYou = () => {
+  const cookies = new Cookies(null, { path: "/" });
   const navigate = useNavigate();
   const handleTimeOut = async () => {
     try {
-      const user = await viewUser();
-      if (user) {
+      const token = cookies.get("token");
+      if (token) {
         setTimeout(() => {
           navigate("/secured");
         }, 10000);
