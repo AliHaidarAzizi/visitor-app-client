@@ -17,7 +17,7 @@ function Home() {
               No More <span className=" text-indigo-700">“Who Are You?”</span>
             </h1>
             <h3 className="text-2xl font-light">
-              Collect your visitor log with Vislog today!
+              Collect your visitor information with Vislog today!
             </h3>
           </div>
           <div className="">

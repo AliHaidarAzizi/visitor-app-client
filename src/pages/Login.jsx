@@ -35,6 +35,7 @@ export const Login = () => {
         navigate("/secured");
       }, 1500);
     } catch (error) {
+      // console.log(error);
       console.error(error);
       toast.error(error.response.data.message);
 
