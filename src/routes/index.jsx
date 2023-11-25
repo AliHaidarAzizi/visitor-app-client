@@ -18,6 +18,7 @@ import Venue from "../pages/Venue";
 import VenueForm from "../pages/VenueForm";
 import VisitorLogForm from "../components/VisitorLogForm";
 import ThankYou from "../pages/ThankYou";
+import { BASE_URL } from "../utils/api";
 
   
   
@@ -49,7 +50,7 @@ import ThankYou from "../pages/ThankYou";
         const config = {
           headers: { Authorization: `Bearer ${token}` }
         }
-        const res = await axios.get("http://localhost:3000/protected", config )
+        const res = await axios.get(`${BASE_URL}/protected`, config )
         setUserId(res.data.data.user)
       } catch (error) {
         console.error(error);
