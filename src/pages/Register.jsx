@@ -3,9 +3,12 @@ import Header from "../components/Header.jsx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { apiRegister } from "../utils/api";
+import { useState } from "react";
+import { Oval } from "react-loader-spinner";
 
 export const Register = () => {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +27,7 @@ export const Register = () => {
     // const data = Object.fromEntries(formData);
 
     try {
+      setIsLoading(true);
       const res = await apiRegister(data);
       console.log(res);
       toast.success(res.data.message, {
@@ -42,6 +46,8 @@ export const Register = () => {
       toast.error(error.response.data.errors[0].message);
 
       // alert(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -100,9 +106,26 @@ export const Register = () => {
           </div>
           <button
             type="submit"
-            className="text-white bg-indigo-700 w-full hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center"
+            disabled={isLoading}
+            className="flex justify-center items-center text-white bg-indigo-700 w-full hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center"
           >
-            Register new account
+            {isLoading ? (
+              <Oval
+                className=""
+                height={30}
+                width={30}
+                color="#ffffff"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="oval-loading"
+                secondaryColor="#808080"
+                strokeWidth={4}
+                strokeWidthSecondary={4}
+              />
+            ) : (
+              "Register new account"
+            )}
           </button>
         </form>
         <p className="p-3 text-md font-medium text-gray-900">

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Header from "../components/Header.jsx";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import { toast } from "react-toastify";
 import { apiLogin } from "../utils/api";
+import { Oval } from "react-loader-spinner";
+
 export const Login = () => {
   const navigate = useNavigate();
   // const cookies = new Cookies(null, {path : "/"})
@@ -23,7 +24,7 @@ export const Login = () => {
       // start loading here
       setIsLoading(true);
       const res = await apiLogin(data);
-      console.log(res);
+      // console.log(res);
       toast.success(res.data.message, {
         icon: "🔓",
         autoClose: 3000,
@@ -88,9 +89,25 @@ export const Login = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="text-white bg-indigo-700  w-full hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center"
+            className="flex justify-center items-center text-white bg-indigo-700  w-full hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center"
           >
-            {isLoading ? "Loading" : "Login Now"}
+            {isLoading ? (
+              <Oval
+                className=""
+                height={30}
+                width={30}
+                color="#ffffff"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="oval-loading"
+                secondaryColor="#808080"
+                strokeWidth={4}
+                strokeWidthSecondary={4}
+              />
+            ) : (
+              "Login Now"
+            )}
           </button>
         </form>
         <p className="p-3 text-md font-medium text-gray-900">

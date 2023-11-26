@@ -62,7 +62,7 @@ const Sidebar = ({ children }) => {
             src="625813f6-ad6e-49d8-aecf-16ca24753ea5.png"
             alt=""
             className={` overflow-hidden cursor-pointer transition-all ${
-              expanded ? "w-32" : "w-0"
+              expanded ? "w-10" : "w-0"
             }  `}
             onClick={handleLogoButton}
           />

@@ -3,9 +3,12 @@ import Header from "./Header.jsx";
 import { addVisitor } from "../utils/api/addVisitor";
 import { toast } from "react-toastify";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { useState } from "react";
+import { Oval } from "react-loader-spinner";
 
 const VisitorLogForm = () => {
   const [visitorData, setVisitorData] = useLocalStorage("VISITOR_DATA", {});
+  const [isLoading, setIsLoading] = useState(false);
   let { venueId } = useParams();
   //  console.log(venueId)
   venueId = parseInt(venueId);
@@ -26,6 +29,7 @@ const VisitorLogForm = () => {
     };
 
     try {
+      setIsLoading(true);
       const res = await addVisitor(data);
       // setVisitorData(res.data.data);
       console.log(res);
@@ -45,6 +49,8 @@ const VisitorLogForm = () => {
       toast.error(error.response.data.errors[0].message);
 
       // alert(error.response.data.message);response.data.message
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -164,9 +170,25 @@ const VisitorLogForm = () => {
 
               <button
                 type="submit"
-                className="text-white bg-indigo-700 w-full hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center"
+                className="flex justify-center items-center text-white bg-indigo-700 w-full hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-md px-5 py-2.5 text-center"
               >
-                Submit
+                {isLoading ? (
+                  <Oval
+                    className=""
+                    height={30}
+                    width={30}
+                    color="#ffffff"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                    ariaLabel="oval-loading"
+                    secondaryColor="#808080"
+                    strokeWidth={4}
+                    strokeWidthSecondary={4}
+                  />
+                ) : (
+                  "Submit"
+                )}
               </button>
             </form>
           </div>
