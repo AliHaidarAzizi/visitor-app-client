@@ -7,9 +7,9 @@ import { useState } from "react";
 import { Oval } from "react-loader-spinner";
 
 const VisitorLogForm = () => {
-  const [visitorData, setVisitorData] = useLocalStorage("VISITOR_DATA", {});
-  const [isLoading, setIsLoading] = useState(false);
   let { venueId } = useParams();
+  const [visitorData, setVisitorData] = useLocalStorage("VISITOR_DATA", {}, venueId);
+  const [isLoading, setIsLoading] = useState(false);
   //  console.log(venueId)
   venueId = parseInt(venueId);
   const navigate = useNavigate();

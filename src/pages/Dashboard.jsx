@@ -80,7 +80,7 @@ const Dashboard = () => {
               <h2 className=" capitalize text-2xl font-bold ">{`Welcome ${user}!`}</h2>
               <div className="grid grid-cols-3 pb-3">
                 <button
-                  className=" col-start-3 bg-indigo-300 hover:bg-indigo-500 rounded-md py-1 text-white"
+                  className=" p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white"
                   onClick={() => navigate("/secured/add")}
                 >
                   Add New Venue

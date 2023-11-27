@@ -53,12 +53,12 @@ export const Register = () => {
   return (
     <>
       <Header />
-      <div className=" p-4 flex flex-col justify-center items-center gap-2">
+      <div className=" w-full p-4 flex flex-col justify-center items-center gap-2">
         <h4 className=" text-2xl font-bold">Registration</h4>
         <p>Please register to use Vislog features</p>
         <form
           onSubmit={(e) => handleSubmit(e)}
-          className="lg:w-1/3 md:w-1/3 mt-2"
+          className="w-2/3 lg:w-1/3 md:w-2/3 mt-2"
         >
           <div className="mb-6">
             <label
@@ -71,7 +71,7 @@ export const Register = () => {
               type="email"
               id="email"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder="name@flowbite.com"
+              placeholder="name@example.com"
               required
             />
           </div>

@@ -50,7 +50,7 @@ const Venue = () => {
                 Total visits: {logCount}
               </h3>
               <button
-                className=" py-2 col-start-2 md:col-start-3 bg-indigo-300 hover:bg-indigo-500 rounded-md text-white"
+                className=" py-2 col-start-2 md:col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md text-white"
                 onClick={() => navigate(`/add/${venueId}`)}
               >
                 Add New Visitor
