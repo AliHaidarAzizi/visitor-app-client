@@ -12,20 +12,36 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+
   const fetchVenues = async () => {
     try {
       setIsLoading(true);
       const userData = await viewUser();
       setUser(userData.data.data.username);
 
-      const response = await listAllVenue();
+      const response = await listAllVenue(page);
       setData(response.data.data);
       console.log(response.data.data);
+
       return;
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const loadMore = () => {
+    // Increment the page number when the "Load More" button is clicked
+    setPage(page + 1);
+    // Then send a request to your backend with the new page number
+    fetchVenues();
+  };
+  const loadPrevious = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      fetchVenues();
     }
   };
 
@@ -51,7 +67,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchVenues();
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -187,6 +203,25 @@ const Dashboard = () => {
                   </div>
                 ))}
               </div>
+              <div>{page}</div>
+              <button
+                className={`p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
+                  page === 1 ? "hidden" : "visible"
+                } `}
+                onClick={loadPrevious}
+                disabled={page === 1}
+              >
+                Load Previous
+              </button>
+              <button
+                className={`p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
+                  page ? "visible" : "hidden"
+                } `}
+                onClick={loadMore}
+              >
+                Load More
+              </button>{" "}
+              {/* Add a "Load More" button */}
             </div>
           )}
         </main>

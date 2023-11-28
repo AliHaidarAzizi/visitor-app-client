@@ -36,9 +36,10 @@ apiVenue.interceptors.response.use(
   }
 );
 
-export const listAllVenue = async () => {
-  return await apiVenue.get("/");
+export const listAllVenue = async (page = 1) => {
+  return await apiVenue.get(`/?page=${page}`);
 };
+
 export const apiViewVenue = async (venueId) => {
   return await apiVenue.get(`/${venueId}`);
 };
