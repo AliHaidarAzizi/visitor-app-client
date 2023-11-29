@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [user, setUser] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState();
 
   const fetchVenues = async () => {
     try {
@@ -21,8 +22,9 @@ const Dashboard = () => {
       setUser(userData.data.data.username);
 
       const response = await listAllVenue(page);
-      setData(response.data.data);
-      console.log(response.data.data);
+      setData(response.data.list);
+      // console.log(response.data.list);
+      setMaxPage(response.data.pagination.maxPage);
 
       return;
     } catch (error) {
@@ -215,7 +217,7 @@ const Dashboard = () => {
               </button>
               <button
                 className={`p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
-                  page ? "visible" : "hidden"
+                  page === maxPage ? "hidden" : "visible"
                 } `}
                 onClick={loadMore}
               >

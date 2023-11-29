@@ -1,10 +1,6 @@
 import {
   ChevronFirst,
   LogOut,
-  LifeBuoy,
-  Receipt,
-  Boxes,
-  Package,
   LayoutDashboard,
   ChevronLast,
   UserSquareIcon,
