@@ -19,7 +19,7 @@ const Venue = () => {
       setData(venueData.data.data);
     } catch (error) {
       console.error(error);
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.list);
     }
   };
 
@@ -38,9 +38,9 @@ const Venue = () => {
 
   return (
     <>
-      <div className="mt-3">
-        <QRcodeGenerator />
-        <main className="md:m-4 md:mr-2 pr-6 w-full lg:w-5/6">
+      <QRcodeGenerator />
+      <div className="flex flex-col justify-center items-center mt-3">
+        <main className=" md:m-4 md:mr-2 pr-6 w-full lg:w-5/6">
           <div className="m-1 p-1">
             <div className="grid grid-cols-2 md:grid-cols-3 py-3 mx-2">
               <h1 className=" col-start-1 p-2 text-xl font-bold">

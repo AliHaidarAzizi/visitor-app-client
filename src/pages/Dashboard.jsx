@@ -205,25 +205,30 @@ const Dashboard = () => {
                   </div>
                 ))}
               </div>
-              <div>{page}</div>
-              <button
-                className={`p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
-                  page === 1 ? "hidden" : "visible"
-                } `}
-                onClick={loadPrevious}
-                disabled={page === 1}
-              >
-                Load Previous
-              </button>
-              <button
-                className={`p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
-                  page === maxPage ? "hidden" : "visible"
-                } `}
-                onClick={loadMore}
-              >
-                Load More
-              </button>{" "}
-              {/* Add a "Load More" button */}
+              <div className="flex justify-between mt-2 gap-2">
+                {" "}
+                <span>{`${page} of ${maxPage}`}</span>
+                <div className="flex gap-3">
+                  <button
+                    className={` text-sm p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
+                      page === 1 ? "hidden" : "visible"
+                    } `}
+                    onClick={loadPrevious}
+                    disabled={page === 1}
+                  >
+                    Load Previous
+                  </button>
+                  <button
+                    className={`text-sm p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
+                      page === maxPage ? "hidden" : "visible"
+                    } `}
+                    onClick={loadMore}
+                  >
+                    Load More
+                  </button>{" "}
+                </div>
+                {/* Add a "Load More" button */}
+              </div>
             </div>
           )}
         </main>
