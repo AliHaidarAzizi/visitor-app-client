@@ -55,7 +55,7 @@ const Sidebar = ({ children }) => {
       <nav className=" h-full flex flex-col bg-white border-r shadow-sm">
         <div className=" p-4 pb-2 flex justify-between items-center">
           <img
-            src="625813f6-ad6e-49d8-aecf-16ca24753ea5.png"
+            src="/625813f6-ad6e-49d8-aecf-16ca24753ea5.png"
             alt=""
             className={` overflow-hidden cursor-pointer transition-all ${
               expanded ? "w-10" : "w-0"
