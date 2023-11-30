@@ -34,6 +34,6 @@ apiVisitor.interceptors.response.use(
   }
 );
 
-export const viewVisitor = async (venueId) => {
-  return await apiVisitor.get(`/${venueId}`);
+export const viewVisitor = async (venueId, page = 1) => {
+  return await apiVisitor.get(`/${venueId}?page=${page}`);
 };

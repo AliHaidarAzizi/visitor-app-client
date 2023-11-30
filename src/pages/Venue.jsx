@@ -10,19 +10,35 @@ const Venue = () => {
   const { venueId } = useParams();
   const [data, setData] = useState([]);
   const [logCount, setLogCount] = useState([]);
+  const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState();
   const navigate = useNavigate();
 
   const fetchVisitors = async () => {
     try {
-      const venueData = await viewVisitor(venueId);
-      setLogCount(venueData.data.data.length);
-      setData(venueData.data.data);
+      const venueData = await viewVisitor(venueId, page);
+      setLogCount(venueData.data.list.length);
+      setData(venueData.data.list);
+      setMaxPage(venueData.data.pagination.maxPage);
     } catch (error) {
       console.error(error);
       toast.error(error.response.data.list);
     }
   };
 
+  const loadMore = () => {
+    // Increment the page number when the "Load More" button is clicked
+    setPage(page + 1);
+    // Then send a request to your backend with the new page number
+    fetchVisitors();
+  };
+
+  const loadPrevious = () => {
+    if (page > 1) {
+      setPage(page - 1);
+      fetchVisitors();
+    }
+  };
   const humanisedDateTime = (dateTime) => {
     // 1 step - convert string to dateTime data type
     const newDateTime = DateTime.fromISO(dateTime);
@@ -34,7 +50,7 @@ const Venue = () => {
     fetchVisitors();
     const intervalId = setInterval(fetchVisitors, 10000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -133,6 +149,24 @@ const Venue = () => {
                 </div>
               ))}
             </div>
+            <div>{page}</div>
+            <button
+              className={`p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
+                page === 1 ? "hidden" : "visible"
+              } `}
+              onClick={loadPrevious}
+              disabled={page === 1}
+            >
+              Load Previous
+            </button>
+            <button
+              className={`p-3 col-start-3 bg-indigo-700 hover:bg-indigo-800 rounded-md py-1 text-white ${
+                page === maxPage ? "hidden" : "visible"
+              } `}
+              onClick={loadMore}
+            >
+              Load More
+            </button>{" "}
           </div>
         </main>
       </div>
