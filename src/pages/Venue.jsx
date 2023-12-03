@@ -12,11 +12,13 @@ const Venue = () => {
   const [logCount, setLogCount] = useState([]);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState();
+  const [search, setSearch] = useState();
   const navigate = useNavigate();
 
   const fetchVisitors = async () => {
+    console.log(search);
     try {
-      const venueData = await viewVisitor(venueId, page);
+      const venueData = await viewVisitor(venueId, page, search);
       setLogCount(venueData.data.list.length);
       setData(venueData.data.list);
       setMaxPage(venueData.data.pagination.maxPage);
@@ -47,15 +49,22 @@ const Venue = () => {
   };
 
   useEffect(() => {
-    fetchVisitors();
-    const intervalId = setInterval(fetchVisitors, 10000);
-    return () => clearInterval(intervalId);
-  }, [page]);
+    const getData = setTimeout(() => {
+      fetchVisitors();
+    }, 700);
+    return () => clearTimeout(getData);
+  }, [page, search]);
 
   return (
     <>
       <QRcodeGenerator />
       <div className="flex flex-col justify-center items-center mt-3">
+        <input
+          type="text"
+          className="w-80 h-10 p-1 border rounded-lg"
+          placeholder="Search"
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <main className=" md:m-4 md:mr-2 pr-6 w-full lg:w-5/6">
           <div className="m-1 p-1">
             <div className="grid grid-cols-2 md:grid-cols-3 py-3 mx-2">
