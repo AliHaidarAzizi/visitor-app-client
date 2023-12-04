@@ -12,7 +12,7 @@ const Header = () => {
         onClick={() => navigate("/")}
         className=" cursor-pointer scale-[3]"
       />
-      <div className=" text-justify text-lg">
+      <div className=" text-justify text-lg mx-4">
         <button onClick={() => navigate("/register")}>Register</button>
         <button className=" ml-3" onClick={() => navigate("/login")}>
           Login
