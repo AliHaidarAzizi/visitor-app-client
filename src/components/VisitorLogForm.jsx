@@ -8,7 +8,11 @@ import { Oval } from "react-loader-spinner";
 
 const VisitorLogForm = () => {
   let { venueId } = useParams();
-  const [visitorData, setVisitorData] = useLocalStorage("VISITOR_DATA", {}, venueId);
+  const [visitorData, setVisitorData] = useLocalStorage(
+    "VISITOR_DATA",
+    {},
+    venueId
+  );
   const [isLoading, setIsLoading] = useState(false);
   //  console.log(venueId)
   venueId = parseInt(venueId);
@@ -134,6 +138,8 @@ const VisitorLogForm = () => {
                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="0123456789"
                   required
+                  minLength="8"
+                  maxLength="15"
                   value={visitorData.visitorContactNo || ""}
                   onChange={(e) => {
                     setVisitorData({
