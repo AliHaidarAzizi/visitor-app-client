@@ -6,6 +6,7 @@ import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import SidebarComponent from "../components/Sidebar.jsx";
 import { Oval } from "react-loader-spinner";
+import { Modal } from "../components/modal.jsx";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -14,6 +15,8 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState();
+  const [openModal, setOpenModal] = useState(false);
+  const [modalVenueId, setModalVenueId] = useState(null);
 
   const fetchVenues = async () => {
     try {
@@ -53,23 +56,14 @@ const Dashboard = () => {
     // 2. - Format to the designated format
     return newDateTime.toLocaleString();
   };
-  const deleteVenue = async (venueId) => {
-    try {
-      const res = await apiDeleteVenue(venueId);
-      toast.error(res.data.message, {
-        position: toast.POSITION.TOP_CENTER,
-        icon: "📤",
-        autoClose: 3000,
-      });
-      await fetchVenues();
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
+  const handleDeleteClick = (venueId) => {
+    setModalVenueId(venueId);
+    setOpenModal(true);
+  };
   useEffect(() => {
     fetchVenues();
-  }, [page]);
+  }, [page, openModal]);
 
   return (
     <>
@@ -155,10 +149,16 @@ const Dashboard = () => {
                           </p>
                           <p
                             className="hover:underline cursor-pointer"
-                            onClick={() => deleteVenue(venue.id)}
+                            onClick={() => handleDeleteClick(venue.id)}
                           >
                             Delete
                           </p>
+                          {openModal && (
+                            <Modal
+                              setOpenModal={setOpenModal}
+                              venueId={modalVenueId}
+                            />
+                          )}
                         </td>
                       </tr>
                     ))}
