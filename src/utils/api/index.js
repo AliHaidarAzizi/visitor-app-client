@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-console.log(BASE_URL);
+// console.log(BASE_URL);
 
 const cookies = new Cookies(null, { path: "/" });
 const apiAuth = axios.create({

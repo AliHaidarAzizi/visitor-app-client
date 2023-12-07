@@ -6,7 +6,6 @@ import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import SidebarComponent from "../../components/Sidebar.jsx";
 import { Oval } from "react-loader-spinner";
-import { Modal } from "../../components/modal.jsx";
 import VenueRow from "./components/VenueRow";
 
 const Dashboard = () => {
@@ -55,6 +54,10 @@ const Dashboard = () => {
     // 2. - Format to the designated format
     return newDateTime.toLocaleString();
   };
+  const onDelete = () => {
+    fetchVenues();
+  };
+
   useEffect(() => {
     fetchVenues();
   }, [page]);
@@ -115,7 +118,7 @@ const Dashboard = () => {
                   </thead>
                   <tbody className=" divide-y divide-indigo-300">
                     {data.map((venue, index) => (
-                      <VenueRow venue={venue} key={index} />
+                      <VenueRow venue={venue} key={index} onDelete={onDelete} />
                     ))}
                   </tbody>
                 </table>

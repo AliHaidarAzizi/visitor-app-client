@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Modal } from "../../../components/modal";
 import { useNavigate } from "react-router-dom";
 
-const VenueRow = ({ venue }) => {
+const VenueRow = ({ venue, onDelete }) => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [modalVenueId, setModalVenueId] = useState(null);
@@ -18,7 +18,7 @@ const VenueRow = ({ venue }) => {
     setModalVenueId(venueId);
     setOpenModal(true);
   };
-  const handleDelete = () => console.log("DELETE");
+
   return (
     <tr className="bg-indigo-50">
       <td className=" p-5 text-sm text-gray-800 ">{venue.venueName}</td>
@@ -54,7 +54,7 @@ const VenueRow = ({ venue }) => {
           <Modal
             setOpenModal={setOpenModal}
             venueId={modalVenueId}
-            onDelete={handleDelete}
+            onDelete={onDelete}
           />
         )}
       </td>

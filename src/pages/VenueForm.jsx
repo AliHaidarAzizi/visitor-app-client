@@ -18,7 +18,7 @@ const VenueForm = () => {
     try {
       setIsLoading(true);
       const res = await apiAddVenue(data);
-      console.log(res);
+      // console.log(res);
       toast.success(res.data.message, {
         position: toast.POSITION.TOP_CENTER,
         icon: "🚀",
