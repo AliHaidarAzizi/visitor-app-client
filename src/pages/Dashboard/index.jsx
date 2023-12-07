@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { apiDeleteVenue, listAllVenue } from "../utils/api/venue";
+import { apiDeleteVenue, listAllVenue } from "../../utils/api/venue";
 import { useEffect, useState } from "react";
-import { viewUser } from "../utils/api/user";
+import { viewUser } from "../../utils/api/user";
 import { DateTime } from "luxon";
 import { toast } from "react-toastify";
-import SidebarComponent from "../components/Sidebar.jsx";
+import SidebarComponent from "../../components/Sidebar.jsx";
 import { Oval } from "react-loader-spinner";
-import { Modal } from "../components/modal.jsx";
+import { Modal } from "../../components/modal.jsx";
+import VenueRow from "./components/VenueRow";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -15,8 +16,6 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState();
-  const [openModal, setOpenModal] = useState(false);
-  const [modalVenueId, setModalVenueId] = useState(null);
 
   const fetchVenues = async () => {
     try {
@@ -56,14 +55,9 @@ const Dashboard = () => {
     // 2. - Format to the designated format
     return newDateTime.toLocaleString();
   };
-
-  const handleDeleteClick = (venueId) => {
-    setModalVenueId(venueId);
-    setOpenModal(true);
-  };
   useEffect(() => {
     fetchVenues();
-  }, [page, openModal]);
+  }, [page]);
 
   return (
     <>
@@ -121,46 +115,7 @@ const Dashboard = () => {
                   </thead>
                   <tbody className=" divide-y divide-indigo-300">
                     {data.map((venue, index) => (
-                      <tr key={index} className="bg-indigo-50">
-                        <td className=" p-5 text-sm text-gray-800 ">
-                          {venue.venueName}
-                        </td>
-                        <td className=" p-5 text-sm text-gray-800 ">
-                          <span className="p-1.5 text-md font-bold tracking-wide text-purple-900  ">
-                            {venue.venueCapacity === null
-                              ? null
-                              : venue.venueCapacity - venue.visitLogsCount}
-                          </span>
-                        </td>
-                        <td className=" p-5 text-sm text-gray-800 ">
-                          <span className="p-1.5 text-md font-bold tracking-wide text-purple-900  ">
-                            {venue.visitLogsCount}
-                          </span>
-                        </td>
-                        <td className=" p-5 text-sm text-gray-800 ">
-                          {humanisedDateTime(venue.createdAt)}
-                        </td>
-                        <td className=" p-5 text-sm font-bold text-blue-800">
-                          <p
-                            className="hover:underline cursor-pointer"
-                            onClick={() => navigate(`/secured/${venue.id}`)}
-                          >
-                            View More
-                          </p>
-                          <p
-                            className="hover:underline cursor-pointer"
-                            onClick={() => handleDeleteClick(venue.id)}
-                          >
-                            Delete
-                          </p>
-                          {openModal && (
-                            <Modal
-                              setOpenModal={setOpenModal}
-                              venueId={modalVenueId}
-                            />
-                          )}
-                        </td>
-                      </tr>
+                      <VenueRow venue={venue} key={index} />
                     ))}
                   </tbody>
                 </table>

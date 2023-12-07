@@ -1,10 +1,8 @@
 import React from "react";
 import { toast } from "react-toastify";
 import { apiDeleteVenue } from "../utils/api/venue";
-import { useNavigate } from "react-router-dom";
 
-export const Modal = ({ setOpenModal, venueId }) => {
-  const navigate = useNavigate;
+export const Modal = ({ setOpenModal, venueId, onDelete }) => {
   const deleteVenue = async (venueId) => {
     try {
       const res = await apiDeleteVenue(venueId);
@@ -19,11 +17,17 @@ export const Modal = ({ setOpenModal, venueId }) => {
     }
   };
 
+  const handleDelete = () => {
+    onDelete();
+    deleteVenue(venueId);
+    setOpenModal(false);
+  };
+
   return (
     <>
       <div className="fixed inset-0 z-10 overflow-y-auto">
         <div
-          className="fixed inset-0 w-full h-full bg-black opacity-60"
+          className="fixed inset-0 w-full h-full bg-black opacity-40"
           onClick={() => setOpenModal(false)}
         ></div>
         <div className="flex items-center min-h-screen px-4 py-8">
@@ -54,10 +58,11 @@ export const Modal = ({ setOpenModal, venueId }) => {
                 <div className="items-center gap-2 mt-3 sm:flex">
                   <button
                     className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
-                    onClick={async () => {
-                      setOpenModal(false);
-                      await deleteVenue(venueId);
-                    }}
+                    // onClick={async () => {
+                    //   setOpenModal(false);
+                    //   await deleteVenue(venueId);
+                    // }}
+                    onClick={handleDelete}
                   >
                     Delete
                   </button>
