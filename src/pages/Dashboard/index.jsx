@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { apiDeleteVenue, listAllVenue } from "../../utils/api/venue";
+import { listAllVenue } from "../../utils/api/venue";
 import { useEffect, useState } from "react";
 import { viewUser } from "../../utils/api/user";
 import { DateTime } from "luxon";

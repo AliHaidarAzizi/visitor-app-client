@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import { DateTime } from "luxon";
-import React, { useState } from "react";
-import { Modal } from "../../../components/modal";
+import { useState } from "react";
+import { Modal } from "../../../components/Modal.jsx";
 import { useNavigate } from "react-router-dom";
 
 const VenueRow = ({ venue, onDelete }) => {

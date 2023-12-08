@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { viewVisitor } from "../utils/api/visitor";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";

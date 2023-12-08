@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/no-unescaped-entities */
+import { useState } from "react";
 import Header from "../components/Header.jsx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
