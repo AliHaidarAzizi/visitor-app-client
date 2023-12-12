@@ -37,3 +37,7 @@ apiUser.interceptors.response.use(
 export const viewUser = async () => {
   return await apiUser.get("/");
 };
+
+export const editUser = async () => {
+  return await apiUser.put();
+};
