@@ -15,7 +15,7 @@ const Profile = ({ userId }) => {
       toast.error(error.response.data);
     }
   };
-
+  const userArray = user;
   useEffect(() => {
     fetchUser();
   }, []);
@@ -25,8 +25,8 @@ const Profile = ({ userId }) => {
       <SidebarComponent />
       {user && (
         <div>
-          profile {userId}
-          <EditInput userData={user} />
+          profile {userArray.username}
+          <EditInput userData={userArray} />
         </div>
       )}
     </div>

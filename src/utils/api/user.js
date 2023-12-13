@@ -38,6 +38,6 @@ export const viewUser = async () => {
   return await apiUser.get("/");
 };
 
-export const editUser = async () => {
-  return await apiUser.put();
+export const editUser = async (data) => {
+  return await apiUser.put("/", data);
 };
