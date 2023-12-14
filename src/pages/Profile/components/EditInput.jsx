@@ -12,7 +12,7 @@ const EditInput = ({ userData }) => {
 
   const allowedKeys = ["email", "username"];
 
-  const handleEditButton = (key) => {
+  const handleEditButton = (key, e) => {
     setState({
       ...state,
       editing: { ...state.editing, [key]: !state.editing[key] },
@@ -25,6 +25,7 @@ const EditInput = ({ userData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    debugger;
     // console.dir(e.target[2].value)
 
     // Method 1
@@ -54,7 +55,7 @@ const EditInput = ({ userData }) => {
       if (error.response.data.message) {
         toast.error(error.response.data.message);
       }
-      toast.error(error.response.data.errors[0].message);
+      toast.error(error.response.data.message);
 
       // alert(error.response.data.message);
     }
@@ -68,12 +69,7 @@ const EditInput = ({ userData }) => {
             <div className="gap-3 my-3" key={key}>
               <span className=" text-lg font-medium">{key}</span>
               <div className="flex">
-                <form
-                  className="flex"
-                  onSubmit={
-                    state.editing[key] ? (e) => handleSubmit(e) : () => null
-                  }
-                >
+                <form className="flex" onSubmit={handleSubmit}>
                   {state.editing[key] ? (
                     <input
                       className="pl-3 px-1 w-1/3 bg-indigo-200 rounded-sm"
@@ -87,13 +83,27 @@ const EditInput = ({ userData }) => {
                       {state[key]}
                     </span>
                   )}
-                  <button
-                    type="submit"
-                    className=" bg-indigo-500 py-1 px-3 rounded-md mx-3 text-white"
-                    onClick={() => handleEditButton(key)}
-                  >
-                    {state.editing[key] ? "Save" : "Edit"}
-                  </button>
+                  {!state.editing[key] ? (
+                    <button
+                      className=" bg-indigo-500 py-1 px-3 rounded-md mx-3 text-white"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        handleEditButton(key);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className=" bg-indigo-500 py-1 px-3 rounded-md mx-3 text-white"
+                      onClick={() => {
+                        handleEditButton(key);
+                      }}
+                    >
+                      Save
+                    </button>
+                  )}
                 </form>
               </div>
             </div>
