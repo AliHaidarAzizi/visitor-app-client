@@ -25,13 +25,12 @@ const EditInput = ({ userData }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    debugger;
+
     // console.dir(e.target[2].value)
 
     // Method 1
-    const email = e.target[0].value;
-    const username = e.target[1].value;
-    const data = { email, username };
+    const data = e.target;
+    console.log(">>>>>>>>>", data);
 
     // Method 2
     // const form = e.target;
@@ -69,7 +68,7 @@ const EditInput = ({ userData }) => {
             <div className="gap-3 my-3" key={key}>
               <span className=" text-lg font-medium">{key}</span>
               <div className="flex">
-                <form className="flex" onSubmit={handleSubmit}>
+                <form className="flex" onSubmit={(e) => handleSubmit(e)}>
                   {state.editing[key] ? (
                     <input
                       className="pl-3 px-1 w-1/3 bg-indigo-200 rounded-sm"
