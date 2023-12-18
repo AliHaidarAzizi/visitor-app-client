@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { editUser } from "../../../utils/api/user";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const EditInput = ({ userData }) => {
+const EditInput = ({ userData, OnFetch }) => {
   const navigate = useNavigate();
   const [state, setState] = useState({
     ...userData,
@@ -23,20 +23,20 @@ const EditInput = ({ userData }) => {
     setState({ ...state, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, key) => {
     e.preventDefault();
 
     // console.dir(e.target[2].value)
 
     // Method 1
-    const data = e.target;
-    console.log(">>>>>>>>>", data);
+    // const data = e.target;
+    // console.log(">>>>>>>>>", data);
 
     // Method 2
-    // const form = e.target;
-    // console.log(form)
-    // const formData = new FormData(form);
-    // const data = Object.fromEntries(formData);
+    const form = e.target;
+    console.log(form);
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
 
     try {
       const res = await editUser(data);
@@ -57,6 +57,9 @@ const EditInput = ({ userData }) => {
       toast.error(error.response.data.message);
 
       // alert(error.response.data.message);
+    } finally {
+      handleEditButton(key);
+      OnFetch();
     }
   };
 
@@ -68,7 +71,7 @@ const EditInput = ({ userData }) => {
             <div className="gap-3 my-3" key={key}>
               <span className=" text-lg font-medium">{key}</span>
               <div className="flex">
-                <form className="flex" onSubmit={(e) => handleSubmit(e)}>
+                <form className="flex" onSubmit={(e) => handleSubmit(e, key)}>
                   {state.editing[key] ? (
                     <input
                       className="pl-3 px-1 w-1/3 bg-indigo-200 rounded-sm"
@@ -96,9 +99,6 @@ const EditInput = ({ userData }) => {
                     <button
                       type="submit"
                       className=" bg-indigo-500 py-1 px-3 rounded-md mx-3 text-white"
-                      onClick={() => {
-                        handleEditButton(key);
-                      }}
                     >
                       Save
                     </button>

@@ -16,6 +16,9 @@ const Profile = ({ userId }) => {
     }
   };
   const userArray = user;
+  const onFetch = () => {
+    fetchUser();
+  };
   useEffect(() => {
     fetchUser();
   }, []);
@@ -26,7 +29,7 @@ const Profile = ({ userId }) => {
       {user && (
         <div>
           profile {userArray.username}
-          <EditInput userData={userArray} />
+          <EditInput userData={userArray} OnFetch={onFetch} />
         </div>
       )}
     </div>
