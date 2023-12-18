@@ -34,13 +34,13 @@ const EditInput = ({ userData, OnFetch }) => {
 
     // Method 2
     const form = e.target;
-    console.log(form);
+    // console.log(form);
     const formData = new FormData(form);
     const data = Object.fromEntries(formData);
 
     try {
       const res = await editUser(data);
-      console.log(res);
+      // console.log(res);
       toast.success(res.data.message, {
         icon: "🚀",
         autoClose: 3000,
@@ -64,24 +64,24 @@ const EditInput = ({ userData, OnFetch }) => {
   };
 
   return (
-    <div className="ml-3 w-screen">
+    <div className="ml-3 w-2/3">
       {Object.keys(userData).map(
         (key) =>
           allowedKeys.includes(key) && (
-            <div className="gap-3 my-3" key={key}>
+            <div className="gap-3 mt-3" key={key}>
               <span className=" text-lg font-medium">{key}</span>
-              <div className="flex">
-                <form className="flex" onSubmit={(e) => handleSubmit(e, key)}>
+              <form className="flex" onSubmit={(e) => handleSubmit(e, key)}>
+                <div className="flex flex-row">
                   {state.editing[key] ? (
                     <input
-                      className="pl-3 px-1 w-1/3 bg-indigo-200 rounded-sm"
+                      className="pl-3 px-1 bg-indigo-200 rounded-sm"
                       type={key === "name" ? "text" : key}
                       name={key}
                       value={state[key]}
                       onChange={(event) => handleChange(event)}
                     />
                   ) : (
-                    <span className="pl-3 px-1 w-1/3 rounded-sm text-gray-600 ">
+                    <span className="pl-3 px-1 rounded-sm text-gray-600 ">
                       {state[key]}
                     </span>
                   )}
@@ -103,8 +103,8 @@ const EditInput = ({ userData, OnFetch }) => {
                       Save
                     </button>
                   )}
-                </form>
-              </div>
+                </div>
+              </form>
             </div>
           )
       )}

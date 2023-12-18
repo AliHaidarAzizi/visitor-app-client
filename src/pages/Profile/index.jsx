@@ -27,7 +27,7 @@ const Profile = ({ userId }) => {
     <div className="flex">
       <SidebarComponent />
       {user && (
-        <div>
+        <div className="">
           profile {userArray.username}
           <EditInput userData={userArray} OnFetch={onFetch} />
         </div>
